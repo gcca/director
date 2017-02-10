@@ -1,5 +1,6 @@
 import { NgModule }      from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { RouterModule }      from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { DirectorsComponent } from './directors.component';
@@ -7,8 +8,21 @@ import { DirectorComponent } from './director.component';
 import { LineEditComponent } from './line-edit.component';
 
 
+let RouterModuleForRoot = RouterModule.forRoot([{
+  path: '',
+  redirectTo: '/directors',
+  pathMatch: 'full'
+}, {
+  path: 'directors',
+  component: DirectorsComponent
+}, {
+  path: 'director/:fullName',
+  component: DirectorComponent
+}]);
+
+
 @NgModule({
-  imports:      [ BrowserModule ],
+  imports:      [ BrowserModule, RouterModuleForRoot ],
   declarations: [ AppComponent,
                   DirectorsComponent,
                   DirectorComponent,

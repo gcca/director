@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit }      from '@angular/core';
 
 import { Director } from '../../domain/model/director/director';
 import { DirectorRepository }
@@ -22,7 +22,7 @@ let template = `
     </thead>
     <tbody>
       <tr *ngFor="let director of directors"
-          (click)="selectCurrentDirector(director)">
+          routerLink="/director/{{director.fullName}}">
         <td>{{director.fullName}}</td>
         <td>{{director.sex}}</td>
         <td>{{director.nationality}}</td>
@@ -33,8 +33,6 @@ let template = `
       </tr>
     </tbody>
   </table>
-
-  <director *ngIf="currentDirector" [director]="currentDirector"></director>
 `;
 
 
@@ -44,17 +42,12 @@ let template = `
 export class DirectorsComponent implements OnInit {
 
   directors: Director[];
-  currentDirector: Director;
 
   ngOnInit(): void {
     let directorRepository: DirectorRepository =
       new DirectorRepositoryLocalstorage();
 
     directorRepository.findAll().then(directors => this.directors = directors);
-  }
-
-  selectCurrentDirector(director: Director): void {
-    this.currentDirector = director;
   }
 
 }

@@ -21,8 +21,16 @@ export class DirectorRepositoryLocalstorage implements DirectorRepository {
     );
   }
 
-  find(directorId: number): Promise<Director> {
-    return Promise.resolve(null);
+  find(fullName: string): Promise<Director> {
+    let dto = directorDTOs.find(d => d.name == fullName);
+    return Promise
+      .resolve(new Director(dto.name,
+                            dto.sex,
+                            dto.nationality,
+                            dto.city,
+                            dto.dob,
+                            dto.age,
+                            [new Blockbuster(dto.blockbuster, 1999)]));
   }
 
   store(director: Director): Promise<void> {
