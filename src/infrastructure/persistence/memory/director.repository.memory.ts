@@ -8,8 +8,8 @@ import { DirectorRepository }
 import { LocalStorageRepository } from './localstorage.repository';
 
 
-export class DirectorRepositoryLocalstorage extends LocalStorageRepository
-                                            implements DirectorRepository {
+export class DirectorRepositoryMemory extends LocalStorageRepository
+                                      implements DirectorRepository {
 
   findAll(): Promise<Director[]> {
     return Promise.resolve(
