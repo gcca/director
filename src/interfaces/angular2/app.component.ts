@@ -5,4 +5,4 @@ import { Component } from '@angular/core';
   selector: 'cix-app',
   template: '<router-outlet></router-outlet>'
 })
-export class AppComponent  { }
+export class AppComponent {}

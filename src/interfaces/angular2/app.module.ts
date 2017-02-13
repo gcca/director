@@ -30,4 +30,4 @@ let RouterModuleForRoot = RouterModule.forRoot([{
                   LineEditComponent ],
   bootstrap:    [ AppComponent ]
 })
-export class AppModule { }
+export class AppModule {}

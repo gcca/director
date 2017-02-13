@@ -23,7 +23,7 @@ interface DirectorDTO {
 }
 
 
-export class DirectorRepositoryLocalstorage extends LocalStorageRepository
+export class DirectorRepositoryLocalStorage extends LocalStorageRepository
                                             implements DirectorRepository {
 
   findAll(): Promise<Director[]> {
