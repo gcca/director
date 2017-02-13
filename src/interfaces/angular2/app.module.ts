@@ -1,6 +1,7 @@
 import { NgModule }      from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { RouterModule }      from '@angular/router';
+import { FormsModule }   from '@angular/forms';
+import { RouterModule }  from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { DirectorsComponent } from './directors.component';
@@ -22,7 +23,7 @@ let RouterModuleForRoot = RouterModule.forRoot([{
 
 
 @NgModule({
-  imports:      [ BrowserModule, RouterModuleForRoot ],
+  imports:      [ BrowserModule, FormsModule, RouterModuleForRoot ],
   declarations: [ AppComponent,
                   DirectorsComponent,
                   DirectorComponent,

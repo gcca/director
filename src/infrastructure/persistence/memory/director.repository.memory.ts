@@ -5,11 +5,10 @@ import { Blockbuster }
 import { DirectorRepository }
   from '../../../domain/model/director/director.repository';
 
-import { LocalStorageRepository } from './localstorage.repository';
+import { directorDTOs } from '../../sampledata/directors';
 
 
-export class DirectorRepositoryMemory extends LocalStorageRepository
-                                      implements DirectorRepository {
+export class DirectorRepositoryMemory implements DirectorRepository {
 
   findAll(): Promise<Director[]> {
     return Promise.resolve(

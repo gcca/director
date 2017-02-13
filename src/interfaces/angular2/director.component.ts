@@ -13,18 +13,19 @@ import { DirectorRepositoryLocalstorage }
 
 
 let template = `
-  <form>
-    <line-edit label="Nombre" [value]="director.fullName"></line-edit>
-    <line-edit label="Género" [value]="director.sex"></line-edit>
-    <line-edit label="Nacionalidad"
-               [value]="director.nationality"></line-edit>
-    <line-edit label="Ciudad" [value]="director.city"></line-edit>
-    <line-edit label="DOB" [value]="director.dob"></line-edit>
-    <line-edit label="Edad" [value]="director.age"></line-edit>
-    <line-edit label="Blockbuster"
-               [value]="director.blockbusters[0].movieName"></line-edit>
-  </form>
   <button (click)="back()">Volver</button>
+  <div>
+    <line-edit label="Nombre" [(ngModel)]="director.fullName"></line-edit>
+    <line-edit label="Género" [(ngModel)]="director.sex"></line-edit>
+    <line-edit label="Nacionalidad"
+               [(ngModel)]="director.nationality"></line-edit>
+    <line-edit label="Ciudad" [(ngModel)]="director.city"></line-edit>
+    <line-edit label="DOB" [(ngModel)]="director.dob"></line-edit>
+    <line-edit label="Edad" [(ngModel)]="director.age"></line-edit>
+    <line-edit label="Blockbuster"
+               [(ngModel)]="director.blockbusters[0].movieName"></line-edit>
+  </div>
+  <button (click)="save(director)">Guardar</button>
 `;
 
 // TODO: NullDirector (pattern)
@@ -36,15 +37,22 @@ export class DirectorComponent implements OnInit {
 
   director: Director = NullDirector;
 
+  private directorRepository: DirectorRepository;
+
   constructor(private route: ActivatedRoute,
-              private location: Location) {}
+              private location: Location) {
+    this.directorRepository = new DirectorRepositoryLocalstorage();
+  }
+
+  save(director: Director): void {
+    this.directorRepository.store(director)
+      .then(() => this.back())
+      .catch(() => alert('Save director error'));
+  }
 
   ngOnInit(): void {
-    let directorRepository: DirectorRepository =
-      new DirectorRepositoryLocalstorage();
-
     this.route.params
-      .switchMap((params: Params) => directorRepository
+      .switchMap((params: Params) => this.directorRepository
                                        .find(params['fullName']))
       .subscribe(director => this.director = director);
   }
