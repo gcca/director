@@ -7,9 +7,6 @@ import 'rxjs/add/operator/switchMap';
 import { Director } from '../../domain/model/director/director';
 import { DirectorRepository }
   from '../../domain/model/director/director.repository';
-import { DirectorRepositoryLocalstorage }
-  from '../../infrastructure/persistence/localstorage/director.repository.localstorage';
-
 
 
 let template = `
@@ -40,9 +37,7 @@ export class DirectorComponent implements OnInit {
   private directorRepository: DirectorRepository;
 
   constructor(private route: ActivatedRoute,
-              private location: Location) {
-    this.directorRepository = new DirectorRepositoryLocalstorage();
-  }
+              private location: Location) {}
 
   save(director: Director): void {
     this.directorRepository.store(director)

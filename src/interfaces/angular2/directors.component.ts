@@ -3,8 +3,6 @@ import { Component, OnInit }      from '@angular/core';
 import { Director } from '../../domain/model/director/director';
 import { DirectorRepository }
   from '../../domain/model/director/director.repository';
-import { DirectorRepositoryLocalstorage }
-  from '../../infrastructure/persistence/localstorage/director.repository.localstorage';
 
 
 let template = `
@@ -43,11 +41,11 @@ export class DirectorsComponent implements OnInit {
 
   directors: Director[];
 
-  ngOnInit(): void {
-    let directorRepository: DirectorRepository =
-      new DirectorRepositoryLocalstorage();
+  private directorRepository: DirectorRepository;
 
-    directorRepository.findAll().then(directors => this.directors = directors);
+  ngOnInit(): void {
+    this.directorRepository.findAll()
+      .then(directors => this.directors = directors);
   }
 
 }
